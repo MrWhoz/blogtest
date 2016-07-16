@@ -14,7 +14,8 @@
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0",
     "consolidate": "latest" ,
-    "mustache" : "latest"
+    "mustache" : "latest",
+    "mongoose" : "latest"
   },
   "description": "test",
   "main": "app.js",

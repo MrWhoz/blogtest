@@ -69,27 +69,26 @@
                       <img src="/img/doge.png" width="200" height="200">
                   </div>
               </div>
-              <a href="#openModal">Open Modal</a>
-              <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+              <button id="getdata" class="btn btn-info btn-lg" >click here</button>
+              <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Post</button>
 
               <div class="modal fade" id="myModal" role="dialog">
                  <div class="modal-dialog">
-
                    <!-- Modal content-->
                    <div class="modal-content">
                      <div class="modal-header">
                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                       <h4 class="modal-title">Modal Header</h4>
+                       <h4 class="modal-title">What do you want?</h4>
                      </div>
                      <div class="modal-body">
-                       <p>Some text in the modal.</p>
                                    <textarea name="editor1"></textarea>
                     <script>
             CKEDITOR.replace( 'editor1' );
         </script>
+
                      </div>
                      <div class="modal-footer">
-                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                       <button id="bsubmit" type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
                      </div>
                    </div>
 
@@ -119,6 +118,37 @@
 
             <p>In Virtuoso you will find a premium template solution for your site, giving you the framework to build an artistic yet functional style to any project.</p>
             <p class="margin-bottom-20">This Bootstrap templates comes with a host of easy to use features all written in developer friendly code. We have ensured to clearly comment all code, making it as easy as possible for you to implement your project in to the template.</p>
+
+<script type="text/javascript">
+  $("#bsubmit").click(function(e) {
+e.preventDefault();
+    var url = "/api/post"; // the script where you handle the form input.
+    var blogdata = CKEDITOR.instances.editor1.getData();
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: { blog : String(blogdata)}, // serializes the form's elements.
+           success: function(data)
+           {
+               alert(blogdata); // show response from the php script.
+           }
+         });
+
+     // avoid to execute the actual submit of the form.
+});
+  $("#getdata").click(function(e){
+
+    $.ajax({
+           type: "GET",
+           url: "/api/get",
+           //data: $(this).serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+               $("#posts").html(data.body);
+           }
+         });
+  })
+</script>
             <ul>
                 <li>Responsive Layout</li>
                 <li>Isotope Filterable Portfolio</li>
@@ -128,6 +158,8 @@
                 <li>Detailed HTML Commenting</li>
                 <li>LESS CSS Files</li>
             </ul>
+        </div>
+        <div id = "posts" class="well well-scope"> 
         </div>
       </div>
     </div>
