@@ -15,8 +15,9 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
   <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
-<body data-spy="scroll" data-target="#sidebar-menu">
+<body data-spy="scroll" data-target="#sidebar-menu" ng-app="">
   <header class="nav-scope navbar navbar-default navbar-static-top hidden-lg hidden-md" role="banner">
     <div class="container">
       <div class="row">
@@ -61,8 +62,8 @@
               <div class="col-md-7">
                   <h1>Tung</h1>
                   <p>SSSSSSSSSSSSSS</p>
-                  <a href="http://facebook.com/mr.whoz" class="btn btn-primary btn-lg margin-top-20" target="_blank">Facebook<span class="glyphicon glyphicon-picture"></span></a>
-                  <a href="#openModal" class="btn btn-success btn-lg margin-top-20" >WrapBootstrap <span class="glyphicon glyphicon-chevron-right"></span></a>
+                  <a href="test" class="btn btn-primary btn-lg margin-top-20" target="_blank">Facebook<span class="glyphicon glyphicon-picture"></span></a>
+                  <button class="btn btn-success btn-lg margin-top-20">Show me  <span class="glyphicon glyphicon-chevron-right"></span></button>
               </div>
               <div class="col-md-5">
                   <div class="pull-right">
@@ -158,6 +159,16 @@ e.preventDefault();
                 <li>Detailed HTML Commenting</li>
                 <li>LESS CSS Files</li>
             </ul>
+        </div>
+        <div class="well well-scope">
+          <p>Click the button:</p>
+
+<button ng-app= "ac" ng-click="count = count + 1" ng-init="count=0">OK</button>
+
+<p>The button has been clicked {{count}} times.</p>
+
+<p>This example increases the value of the variable "count" every time you click the button.</p>
+
         </div>
         <div id = "posts" class="well well-scope">
         </div>

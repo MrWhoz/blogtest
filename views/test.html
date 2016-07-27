@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TUNG DEP TRAI  </title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Virtuoso Documentation</title>
+  <meta name="description" content="Installation Documentation for your Bootstrap Template" />
+  <meta name="keywords" content="boostra, template, documentaion" />
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Responsive Meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css"/>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<body>
+
+<p>Click the button:</p>
+
+<button id="random" class="btn btn-info btn-lg" >Random</button>
+<button id="getdata" class="btn btn-info btn-lg" >get get it</button>
+<p id="text">The button has been clicked {{ count }} times.</p>
+<div id = "get" class="well well-scope">
+
+</body>
+</html>
+<script>
+$(document).ready(function(){
+    $("#random").click(function(){
+        $("#text").hide();
+    });
+    $("#random").mouseenter(function(){
+    $("#text").hide();
+});
+});
+$("#getdata").click(function(e){
+
+/*  $.ajax({
+    type: "POST",
+    url: url,
+    data: { blog : String(blogdata)}, // serializes the form's elements.
+    success: function(data)
+    {
+        alert(blogdata); // show response from the php script.
+    }
+  });*/$.ajax({
+         type: "GET",
+         url: "/api/get",
+         //data: $(this).serialize(), // serializes the form's elements.
+         success: function(data)
+         {
+             $("#get").html(data.body);
+         }
+
+       });
+})
+</script>

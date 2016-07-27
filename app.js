@@ -12,7 +12,7 @@ var app = express();
 mongoose.connect('mongodb://localhost/my_database');
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
- 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 var engines = require('consolidate');
@@ -20,10 +20,18 @@ var engines = require('consolidate');
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 var BlogPost = new Schema({
+  id: Number,
   title     : String
   , body      : String
 });
 var BlogData = mongoose.model('BlogPost', BlogPost);
+var dcount = 0;
+console.log(BlogData.count());
+BlogData.count({}, function( err, count){
+    console.log( "Number of users:", count );
+    dcount = count;
+    console.log(dcount);
+});
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -39,8 +47,9 @@ app.use('/users', users);
 app.post('/api/post', function(req,res){
   console.log("test vo api");
   console.log(req.body);
-
+  dcount = dcount+1;
    var abd = new BlogData({
+     id: dcount,
    title : "test",
    body : req.body.blog
 });
@@ -49,10 +58,16 @@ app.post('/api/post', function(req,res){
 });
 app.get('/api/get', function(req, res) {
 console.log("into get");
-  BlogData.findOne({},function(err,BlogPost){
-    console.log(BlogPost);
+  // BlogData.findOne({},function(err,BlogPost){
+  //   console.log(BlogPost);
+  //   res.json(BlogPost);
+  // });
+  Math.floor((Math.random() * 10) + 1);
+  var stream = BlogData.findOne({id:6},function(err, BlogPost) {
+
     res.json(BlogPost);
   });
+  //console.log(stream);
 });
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
